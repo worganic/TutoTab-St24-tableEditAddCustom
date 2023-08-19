@@ -1,0 +1,3 @@
+<div class="container">
+<app-worg-table [tableOption]="tableOption" [ELEMENT_DATA]="dataAsync$ | async" (newDataEvent)="getData()" (action)="action($event)"></app-worg-table>
+</div>

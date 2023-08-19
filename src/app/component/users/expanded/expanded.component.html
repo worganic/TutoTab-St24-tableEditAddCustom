@@ -1,0 +1,30 @@
+<span #label>
+    <table class="table tableCustom table-striped">
+        <thead class="tableTheadCustom">
+            <tr>
+                <th class="thead" scope="col">
+                    id
+                </th>
+                <td>
+                    Nom
+                </td>
+                <td>
+                    Blocs
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="tableRow">
+                <td>
+                    {{ element?.id }}
+                </td>
+                <td>
+                    {{ element?.firstName }} {{ element?.lastName }} {{ element?.username }}
+                </td>
+                <td>
+                    <!--{{ element?.bloc[0]?.nom }}-->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</span>

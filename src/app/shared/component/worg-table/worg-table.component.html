@@ -1,0 +1,171 @@
+<div *ngIf="tableOption">
+    <!-- Timer MAJ -->
+    <div class="container" *ngIf="tableTimer">
+        <div class="row" style="margin-left:20px;">
+            <div class="col infosMaj">
+                Réactualisation des données dans : <b>{{ time }}</b> secondes.
+            </div>
+            <div class="col">
+                <button mat-raised-button (click)="majDonnees()">
+                    MAJ donnees manuel
+                </button>
+            </div>
+        </div>
+        <div class="row" style="margin-left:20px;">
+            <div class="col">
+                <span class="infosActu" *ngIf="infoActualisation">Les données viennent d'être mise à jour.</span>
+            </div>
+        </div>
+    </div>
+    <!-- Form -->
+    <form [formGroup]="form">
+        <!-- table -->
+        <table class="table tableCustom ">
+            <!-- row title -->
+            <thead class="tableTheadCustom">
+                <tr>
+                    <th class="thead-{{ column.column }} priority-{{ column?.columnPriority }}" scope="col"
+                        *ngFor="let column of findHiddenFalse(Listecolumns)">
+                        <div *ngIf="column.type != 'button'">{{ column.columnTitle }}</div>
+                        <div *ngIf="column.column == 'delete' && optionAdd && !addData">
+                            <button class='btnDelete' (click)="addData = !addData">Ajouter</button>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <!-- row addData --> 
+            <thead class="tableTheadAdd" *ngIf="optionAdd && addData">
+                <tr>
+                    <th class="thead-{{ column.column }} priority-{{ column?.columnPriority }}" scope="col"
+                        *ngFor="let column of findHiddenFalse(Listecolumns)">
+
+                       <div *ngIf="column.type != 'button' && column.edit == true">
+                            <!-- text -->
+                            <input *ngIf="column.editType == undefined"
+                                type="text" id="{{ column.column }}" name="{{ column.column }}"
+                                class="form-control-input form-edit ng-pristine ng-valid ng-touched" />
+                            <!-- select -->
+                            <div *ngIf="column.editType == 'select'" >
+                                <select *ngIf="formData$ | async as elements" 
+                                    type="text" id="{{ column.column }}" name="{{ column.column }}"
+                                    class="form-control-input selected">
+                                    <option
+                                        [value]="elementOpt"
+                                        *ngFor="let elementOpt of elements[column.column]; index as i">
+                                        {{ elementOpt }}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- custom -->
+                            <div *ngIf="column.editType == 'custom'" >
+                                <worg-edit [editOptions]="[null, sectionName, column.column]"></worg-edit>
+                            </div>
+                        </div>
+                        <div *ngIf="column.column == 'edit'">
+                            <button class='btnValidEdit' (click)="buttonFct(null,  'addValid')">Validé</button>
+                        </div>
+                        <div *ngIf="column.column == 'delete'">
+                            <button class='btnCancel' (click)="addData = !addData">Cancel</button>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <!-- row filter -->
+            <thead class="tableFilterCustom" *ngIf="filtre">
+                <tr>
+                    <th scope="col" *ngFor="let column of findHiddenFalse(Listecolumns)"
+                        class="priority-{{ column?.columnPriority }}">
+                        <div *ngIf="column.filter">
+                            <div *ngIf="column.filterType == 'text'">
+                                <input formControlName="{{ column.column }}" type="text"
+                                    class="form-control-input filter" id="search-{{ column.columnTitle }}"
+                                    (keyup)="filterKeyEvent()" />
+                            </div>
+                            <div *ngIf="column.filterType == 'select'">
+                                <select formControlName="{{ column.column }}" *ngIf="formData$ | async as elements"
+                                    class="form-control-input selected" id="search-{{ column.columnTitle }}"
+                                    (change)="filterKeyEvent()">
+                                    <option value="All">All</option>
+                                    <option value="{{ element }}"
+                                        *ngFor="let element of elements[column.column]; index as i">
+                                        {{ element }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <!-- row elements -->
+            <tbody>
+                <ng-container *ngFor="let element of viewData | slice
+                    : (pagination.currentPage - 1) * pagination.pageSize
+                    : pagination.currentPage * pagination.pageSize; let i = index; let isOdd = odd;">
+
+                    <tr class="tableRow" [ngClass]="{'trImpaire': isOdd}">
+                        <td *ngFor="let column of findHiddenFalse(Listecolumns)"
+                            class="row-{{ column.column }} priority-{{ column?.columnPriority }}"
+                            (click)="expandableAction(element, column.expandable)">
+
+                            <!--<div *ngIf="column.type != 'button'  && editAff != element['id'] && column.edit == false"  [innerHTML]="element[column.column] | tbPipe:column.column:column.pipe:element | async"></div>-->
+                            <!-- element / pipe -->
+                            <div *ngIf="((column.type != 'button'  && editAff != element['id']) && column.edit == true) || column.edit != true"
+                                [innerHTML]="element[column.column] | tbPipe:column.column:column.pipe:element | async">
+
+                            </div>
+                            <!-- buttons -->
+                            <div *ngIf="column.type == 'button'">
+                                <!-- buttons col delete -->
+                                <div *ngIf="editAff != element['id'] ||  column.column != 'edit'">
+                                    <button class='btn{{ column.column }}' (click)="buttonFct(element,  column.column)">{{
+                                        column.columnTitle }}</button>
+                                </div>
+                                <!-- buttons col edit -->
+                                <div *ngIf="editAff == element['id'] && column.column == 'edit'">
+                                    <button class='btnValidEdit' (click)="buttonFct(element,  'editValid')">Validé</button>
+                                    <button class='btnValidEdit' (click)="buttonFct(element,  'cancel')">Cancel</button>
+                                </div>
+                            </div>
+                            <!-- input edit -->
+                            <div *ngIf="column.type != 'button' && editAff == element['id'] && column.edit == true">
+                                <!-- text -->
+                                <input *ngIf="column.editType == undefined"
+                                    [value]="element[column.column]" type="text" id="{{ column.column }}" name="{{ column.column }}"
+                                    class="form-control-input form-edit ng-pristine ng-valid ng-touched" />
+                                <!-- select -->
+                                <div *ngIf="column.editType == 'select'" >
+                                    <select *ngIf="formData$ | async as elements" 
+                                        type="text" id="{{ column.column }}" name="{{ column.column }}"
+                                        class="form-control-input selected">
+                                        <option [selected]="elementOpt == element[column.column]"
+                                            [value]="elementOpt"
+                                            *ngFor="let elementOpt of elements[column.column]; index as i">
+                                            {{ elementOpt }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <!-- custom -->
+                                <div *ngIf="column.editType == 'custom'" >
+                                    <worg-edit [editOptions]="[element, sectionName, column.column]"></worg-edit>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="element.isExpand && expandabled" class="tableRow" [ngClass]="{'trImpaire': isOdd}">
+                        <td [attr.colspan]="elementTotal">
+                            <app-expandable [expandableOptions]="[element, sectionName]"></app-expandable>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <!-- pagination -->
+        <app-worg-pagination class="paginator" #pagination [collectionSize]="viewDataLenght"
+            [pageSize]="paginatorPageSize" [firstLastButtons]="true" [maxSize]="paginatorMaxSize"
+            [paginator]="paginator"></app-worg-pagination>
+        <!-- Infos table -->
+        <div *ngIf="infosNbElement">
+            {{ infosNbElementText }} : {{ elementAffiche }} / {{ elementTotal }}
+        </div>
+    </form>
+</div>

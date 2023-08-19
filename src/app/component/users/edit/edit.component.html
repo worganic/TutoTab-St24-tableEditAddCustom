@@ -1,0 +1,37 @@
+<div *ngIf="editDate">
+ 
+	<div class="container">
+		<input type="hidden" id="date" name="date"
+		value="{{ resDate }}"/>
+
+		<input
+			class="datePicker"
+			placeholder="Début"
+			name="dateDeb"
+			id="dateDeb"
+			[(ngModel)]="model0"
+			ngbDatepicker
+			#dateDeb="ngbDatepicker"
+			(ngModelChange)="changeDate()"
+		/>
+		<button class="btn btn-outline-secondary calendar" (click)="dateDeb.toggle()" type="button">
+			<i class="icon-regular fa fa-calendar fa-lg" style="color:rgb(114, 198, 211);" ></i>
+		</button>
+	</div>
+	<div class="container">
+		<input
+			class="datePicker"
+			placeholder="fin"
+			name="dateFin"
+			id="dateFin"
+		
+			[(ngModel)]="model1"
+			ngbDatepicker
+			#dateFin="ngbDatepicker"
+			(ngModelChange)="changeDate()"
+		/>
+		<button class="btn btn-outline-secondary calendar" (click)="dateFin.toggle()" type="button">
+			<i class="icon-regular fa fa-calendar fa-lg" style="color:rgb(114, 198, 211);" ></i>
+		</button>
+	</div>
+</div>

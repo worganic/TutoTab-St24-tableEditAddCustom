@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
+$form-border-color: rgba(0,0,0,.1);
+$primary-bg-color: #F7B1AB;
+
+.container-app {
+  display: flex;
+  flex-flow: column;
+  color: var(--text-color);
+  background-color: var(--main-content-background-color);
+
+  header {
+    padding: 20px 30px;
+    background-color: var(--header-background-color);
+    border-bottom: 1px solid var(--header-border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: -webkit-fill-available;
+    z-index: 5;
+  }
+
+  .menu-items {
+    display: flex;
+    gap: 15px;
+
+    .menu-item {
+      display: inline-block;
+      font-size: 20px;
+      color: var(--header-menu-item-color);
+      padding: 0px 15px;
+      cursor: pointer;
+    }
+  }
+
+  main {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    margin-left:20px;
+    margin-right:20px;
+    align-items: center;
+    height: inherit;
+    height: 100%;
+    background-color: var(--main-content-background-color);
+
+    h1 {
+      font-size: 70px;
+      color: var(--main-content-text-color);
+    }
+  }
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--header-background-color);
+  border-top: 1px solid #000;
+  color: var(--header-menu-item-color);
+  text-align: center;
+  z-index: 2;
+}
+
+
+
+
+.theme-switcher {
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--header-theme-switch-background-color);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 34px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: var(--header-theme-switch-before-background-color);
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+  }
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  input:checked+.slider {
+    background-color: var(--header-theme-switch-checked-background-color);
+  }
+
+  input:focus+.slider {
+    box-shadow: 0 0 1px var(--header-theme-switch-checked-background-color);
+  }
+
+  input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+}
+
+
+
+ .pets-gender {
+  & label {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+
+.radio-container {
+  background: #fff;
+  border: 1px solid $form-border-color;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 5px;
+}
+.radio-container label {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: .2s all ease-in-out;
+  width: 80px;
+}
+.radio-container input[type="radio"] {
+  display: none;
+}
+.radio-container input[type="radio"]:checked + label {
+  background: $primary-bg-color;
+  border: 1px solid $form-border-color;
+}

@@ -1,0 +1,135 @@
+/* Custom table */
+.tableCustom{
+    --bs-table-color: var(--main-content-text-color) !important;
+    --bs-table-bg:: var(--main-content-background-color) !important;
+    --bs-table-striped-color:  var(--table-thead-striped-color) !important;
+    --bs-table-striped-bg:  var(--table-thead-striped-background-color) !important;
+  }
+  .tableTheadCustom{
+    --bs-table-color: var(--table-thead-color) !important;
+    --bs-table-bg: var(--table-thead-background-color) !important;
+  }
+  .tableTheadAdd{
+    --bs-table-color: var(--table-add-color) !important;
+    --bs-table-bg: var(--table-add-background-color) !important;
+  }
+  .tableFilterCustom{
+    --bs-table-color: var(--table-thead-color) !important;
+    --bs-table-bg: var(--table-thead-filter-background-color) !important;
+  }
+  /* Custom table actualisation */
+  .infosActu{
+    font-size: 0.7em;
+    color: var(--table-thead-background-color);
+    font-weight: bold;
+  }
+  .infosMaj{
+    font-size: 0.8em;
+  }
+
+//
+.table .tableFilterCustom .filter{
+  width: 100%;
+  border:1px solid #000000;
+  font-size: 0.9em;
+}
+
+.paginator{
+  float: right;
+}
+
+.btndelete{
+  width: 80px;
+  height: 21px;
+  border: 1px solid #ff0000!important;
+  background-color: #fbbdbd!important;
+  color: #000;
+}
+.btnedit{
+  width: 80px;
+  height: 21px;
+  border: 1px solid #0008ff!important;
+  background-color: #9fa2f3!important;
+  color: #000;
+}
+.btnCancel{
+  width: 80px;
+  height: 21px;
+  border: 1px solid #00ff2fc9!important;
+  background-color: #aff7bcc9!important;
+  color: #000;
+}
+.btnValidEdit{
+  width: 80px;
+  height: 21px;
+  border: 1px solid #0008ff!important;
+  background-color: #9fa2f3!important;
+  color: #000;
+}
+.table .trImpaire{
+  background-color: var(--table-thead-striped-background-color);
+}
+
+
+@media screen and (max-width: 1225px) and (min-width: 1045px) {
+  .priority-5{
+    display:none;
+  }
+}
+
+@media screen and (max-width: 1045px) and (min-width: 565px) {
+  .priority-5{
+    display:none;
+  }
+  .priority-4{
+    display:none;
+  }
+}
+
+@media screen and (max-width: 565px) and (min-width: 300px) {
+  .priority-5{
+    display:none;
+  }
+  .priority-4{
+    display:none;
+  }
+  .priority-3{
+    display:none;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .priority-5{
+    display:none;
+  }
+  .priority-4{
+    display:none;
+  }
+  .priority-3{
+    display:none;
+  }
+  .priority-2{
+    display:none;
+  }
+
+}
+
+.form-edit{
+  width: 100%!important;
+}
+
+.datePicker{
+  width: 100px;
+  font-size: 1.2em!important;
+  height: 29px;
+  font-size: 1.2em;
+}
+.container {
+  padding: 0px;
+  margin:0px;
+  width: 120px;
+}
+.calendar{
+  background-color: antiquewhite;
+  position: absolute;
+}

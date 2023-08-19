@@ -1,0 +1,50 @@
+<nav *ngIf="paginator">
+    <ul [class]="small ? 'pagination pagination-sm' : 'pagination'">
+      <!-- first button -->
+      <li
+        [class]="currentPage === 1 ? 'page-item disabled' : 'page-item'"
+        *ngIf="firstLastButtons"
+      >
+        <button class="page-link" (click)="selectPageNumber(1)">««</button>
+      </li>
+      <!-- previous button -->
+      <li
+        [class]="currentPage === 1 ? 'page-item disabled' : 'page-item'"
+        *ngIf="nextPreviousButtons"
+      >
+        <button class="page-link" (click)="previous()">«</button>
+      </li>
+      <!-- page numbers -->
+      <ng-container *ngFor="let p of totalPages; index as i">
+        <li
+          *ngIf="i + 1 >= currentPage - maxSize && i + 1 <= currentPage + maxSize"
+          [class]="currentPage === i + 1 ? 'page-item active' : 'page-item'"
+        >
+          <button class="page-link" (click)="selectPageNumber(i + 1)">
+            {{ i + 1 }}
+          </button>
+        </li>
+      </ng-container>
+      <!-- next button -->
+      <li
+        [class]="
+          currentPage === totalPages.length ? 'page-item disabled' : 'page-item'
+        "
+        *ngIf="nextPreviousButtons"
+      >
+        <button class="page-link" (click)="next()">»</button>
+      </li>
+      <!-- last button -->
+      <li
+        [class]="
+          currentPage === totalPages.length ? 'page-item disabled' : 'page-item'
+        "
+        *ngIf="firstLastButtons"
+      >
+        <button class="page-link" (click)="selectPageNumber(totalPages.length)">
+          »»
+        </button>
+      </li>
+    </ul>
+  </nav>
+  

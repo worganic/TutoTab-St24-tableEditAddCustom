@@ -1,0 +1,21 @@
+<p>ngbootstrap works!</p>
+
+
+		<div class="input-group">
+			<input
+				class="form-control"
+				placeholder="yyyy-mm-dd"
+				name="dp"
+				[(ngModel)]="model"
+				ngbDatepicker
+				#d="ngbDatepicker"
+			/>
+			<button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                <i class="icon-regular fa fa-calendar fa-lg" style="color:rgb(114, 198, 211);" ></i>
+            </button>
+		</div>
+
+
+<hr />
+<pre>Model: {{ model | json }}</pre>
+

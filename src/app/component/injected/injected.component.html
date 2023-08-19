@@ -1,0 +1,23 @@
+<p>injected works!</p>
+
+<div style="text-align:center">
+    
+  <h1>
+      Welcome to {{ title }}!
+  </h1>
+
+  <button (click)="createComponent('', 'child1')">child1</button>
+  <button (click)="createComponent('Welcome Foo !', 'child2')">Welcome Foo ! child2</button>
+  <button (click)="createComponent('Foo Again ?', 'child2')">Foo Again ? child2</button>
+  <template #messagecontainer></template>
+</div>
+<hr/>
+
+
+
+<div><a target='_blank' href='https://devm.io/angular/dynamically-create-component-angular-142720-001'>Comment créer dynamiquement un composant dans Angular</a></div>
+
+<div><a target='_blank' href='https://netbasal.com/angular-2-understanding-viewcontainerref-acc183f3b682'>Comprendre
+    ViewContainerRef</a></div>
+
+https://www.concretepage.com/angular/angular-createembeddedview-context-and-injector

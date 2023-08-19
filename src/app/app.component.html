@@ -1,0 +1,30 @@
+<div class="container-app">
+    <header>
+      <div class="menu-items">
+        <a class="menu-item" routerLink="/"> Home </a>
+        <a  class="menu-item" routerLink="/design"> Design </a>
+        <a  class="menu-item" routerLink="/users"> Users </a>
+        <a  class="menu-item" routerLink="/abouts"> Abouts </a>
+        <a  class="menu-item" routerLink="/injected"> Injected </a>
+        <a  class="menu-item" routerLink="/multiple"> Multiple </a>
+        <a  class="menu-item" routerLink="/ngbootstrap"> ngBootstrap </a>
+      </div>
+
+      <div class="theme-switcher">
+        <label class="switch">
+          <input
+              type="checkbox"
+              [checked]="isLightTheme"
+              (change)="onThemeSwitchChange()"
+          />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+
+    </header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+</div>
+<div class="footer">@Copyright / {{ version }}</div>
